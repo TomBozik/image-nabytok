@@ -62,13 +62,13 @@ export const pageQuery = graphql`
         }
       }
       mainImage {
-        fluid(maxWidth: 1180, background: "rgb:000000") {
-          ...GatsbyContentfulFluid_tracedSVG
+        fluid(maxWidth: 1180) {
+          ...GatsbyContentfulFluid
         }
       }
       images {
-        fluid(maxWidth: 600, background: "rgb:000000") {
-          ...GatsbyContentfulFluid_tracedSVG
+        fluid(maxWidth: 600) {
+          ...GatsbyContentfulFluid
         }
       }
     }
