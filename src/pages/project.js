@@ -4,25 +4,30 @@ import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
 import styles from './blog.module.css'
 import Layout from '../components/layout'
-import ArticlePreview from '../components/article-preview'
+import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
-class BlogIndex extends React.Component {
+class ProjectIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulBlogPost.edges')
+    const projects = get(this, 'props.data.allContentfulProject.edges')
 
     return (
       <Layout location={this.props.location}>
         <div style={{ background: '#fff' }}>
           <Helmet title={siteTitle} />
-          <div className={styles.hero}>Blog</div>
+          <div className={styles.hero}>Projekty</div>
           <div className="wrapper">
-            <h2 className="section-headline">Recent articles</h2>
-            <ul className="article-list">
-              {posts.map(({ node }) => {
+            <ul className="project-list">
+              {projects.map(({ node }) => {
                 return (
                   <li key={node.slug}>
-                    <ArticlePreview article={node} />
+                    <Link to={`/project/${node.slug}`}> 
+                      <Img alt="" fluid={node.mainImage.fluid} 
+                                  imgStyle={{ objectFit: `none` }} 
+                                  style={{ height: "100%", width: "100%" }} 
+                      /> 
+                    </Link>
                   </li>
                 )
               })}
@@ -34,25 +39,18 @@ class BlogIndex extends React.Component {
   }
 }
 
-export default BlogIndex
+export default ProjectIndex
 
 export const pageQuery = graphql`
-  query BlogIndexQuery {
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+  query ProjectIndexQuery {
+    allContentfulProject {
       edges {
         node {
-          title
+          name
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
-          tags
-          heroImage {
-            fluid(maxWidth: 350, maxHeight: 196, resizingBehavior: SCALE) {
+          mainImage {
+            fluid(maxWidth: 640, background: "rgb:000000") {
               ...GatsbyContentfulFluid_tracedSVG
-            }
-          }
-          description {
-            childMarkdownRemark {
-              html
             }
           }
         }
