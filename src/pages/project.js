@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
-import styles from './blog.module.css'
+import styles from './project.module.css'
 import Layout from '../components/layout'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
@@ -23,10 +23,7 @@ class ProjectIndex extends React.Component {
                 return (
                   <li key={node.slug}>
                     <Link to={`/project/${node.slug}`}> 
-                      <Img alt="" fluid={node.mainImage.fluid} 
-                                  imgStyle={{ objectFit: `none` }} 
-                                  style={{ height: "100%", width: "100%" }} 
-                      /> 
+                      <Img alt="" fluid={node.mainImage.fluid} style={{ height: "100%", width: "100%" }} /> 
                     </Link>
                   </li>
                 )

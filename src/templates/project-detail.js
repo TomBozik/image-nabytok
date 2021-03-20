@@ -29,16 +29,12 @@ class ProjectDetailTemplate extends React.Component {
               }}
             />
 
-            <ul className="project-list">
+            <ul className={styles.image_list}>
               {project.images.map((img, index) => {
                 return (
                   <li key={index}>
-                  <Img alt="" fluid={img.fluid} 
-                              imgStyle={{ objectFit: `none` }} 
-                              style={{ height: "100%", width: "100%" }} 
-                  />
+                  <Img alt="" fluid={img.fluid}  style={{ height: "100%", width: "100%" }} />
                   </li>
-            
                 )
               })}
             </ul>
@@ -62,12 +58,12 @@ export const pageQuery = graphql`
         }
       }
       mainImage {
-        fluid(maxWidth: 1180) {
+        fluid(maxWidth: 1180, quality:100) {
           ...GatsbyContentfulFluid
         }
       }
       images {
-        fluid(maxWidth: 600) {
+        fluid(maxWidth: 1180, quality:100) {
           ...GatsbyContentfulFluid
         }
       }
